@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.3em; /* to get that spaced-out look */
+}
+nav {
+  background-color: white;
+}
+
+ul {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  padding: 1rem;
+  cursor: pointer;
+  letter-spacing: 0.1rem;
+  font-weight: 400;
+}
+
+ul li:hover {
+  color: #49a5e9;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 16rem;
+}
+
+button {
+  background: none;
+  border: 0.125rem solid;
+  padding: 0.5rem 1rem;
+  margin-top: 2rem;
+  border-radius: 0.2rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+}
+.text-container {
+  background-color: #292727;
+  border-radius: 0.5rem;
+  padding-left: 0.3125rem;
+}
+p {
+  color: white;
+  padding: 0.5rem;
+  letter-spacing: 0.1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+
+span {
+  color: #49a5e9;
+  text-transform: capitalize;
+}
+
+.active {
+  color: #49a5e9;
+  font-weight: 700;
+}
