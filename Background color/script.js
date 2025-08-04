@@ -3,7 +3,7 @@ const colorFlipper = document.querySelector(".flipper");
 const hexColor = document.querySelector(".hex");
 const colorText = document.querySelector(".color-name");
 
-let current = "";
+let current = "color"; // Start in color mode
 
 const simpleColors = [
   "red",
@@ -18,24 +18,8 @@ const simpleColors = [
   "brown",
   "lavender",
 ];
-let hexChars = [
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-];
+
+let hexChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
 
 function getRandomHexColor() {
   let hexColor = "#";
@@ -48,6 +32,15 @@ function getRandomHexColor() {
 function getRandomSimpleColor() {
   return simpleColors[Math.floor(Math.random() * simpleColors.length)];
 }
+
+// Set default active tab
+colorFlipper.classList.add("active");
+hexColor.classList.remove("active");
+
+// Set default background to black
+document.body.style.backgroundColor = "black";
+colorText.textContent = "black";
+button.style.color = "white"; // White button text for visibility
 
 button.addEventListener("click", () => {
   let newColor;
@@ -67,8 +60,8 @@ button.addEventListener("click", () => {
   ) {
     button.style.color = "white";
   } else {
-    button.style.backgroundColor = ""; // Reset to original
-    button.style.color = ""; // Reset to original
+    button.style.backgroundColor = "";
+    button.style.color = "";
   }
 });
 

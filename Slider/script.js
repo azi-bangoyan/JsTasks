@@ -3,17 +3,21 @@ const nextButton = document.querySelector(".next");
 const wrapper = document.querySelector(".wrapper");
 let slides = document.querySelectorAll(".article");
 
-const slideWidth = 50; // rem (your current fixed width)
+const slideWidth = 50; 
 let current = 1;
 let intervalId;
 
-// Clone the first slide and add it to the end
-const firstClone = slides[0].cloneNode(true);
-wrapper.appendChild(firstClone);
-
-// Update slides count
 slides = document.querySelectorAll(".article");
 const totalSlides = slides.length;
+
+
+const firstSlide = slides[0].cloneNode(true);
+const lastSlide = slides[slides.length - 1].cloneNode(true);
+wrapper.appendChild(firstSlide); 
+wrapper.insertBefore(lastSlide, slides[0]); 
+
+slides = document.querySelectorAll(".article");
+const totalSlidesWithClones = slides.length;
 
 function startInterval() {
   intervalId = setInterval(() => changeSlide(), 5000);
@@ -33,36 +37,60 @@ function changeSlide(isManual = false) {
   if (isManual) resetInterval();
 
   current++;
-  wrapper.style.transition = "transform 0.5s ease-in-out";
-  wrapper.style.transform = `translateX(-${(current - 1) * slideWidth}rem)`;
 
-  if (current === totalSlides + 1) {
-    // At clone → jump to real first
+  if (current === totalSlidesWithClones) {
     setTimeout(() => {
-      wrapper.style.transition = "none";
-      wrapper.style.transform = `translateX(0rem)`;
-      current = 1;
-    }, 500); // must match transition time
+      wrapper.style.transition = "none"; 
+      wrapper.style.transform = `translateX(0rem)`; 
+      current = 1; 
+
+  
+      setTimeout(() => {
+        wrapper.style.transition = "transform 0.5s ease-in-out";
+      }, 50); 
+    }, 500); 
+
+  } else if (current === 0) {
+    setTimeout(() => {
+      wrapper.style.transition = "none"; 
+      wrapper.style.transform = `translateX(-${(totalSlides - 1) * slideWidth}rem)`; 
+      current = totalSlides; 
+
+   
+      setTimeout(() => {
+        wrapper.style.transition = "transform 0.5s ease-in-out"; 
+      }, 50); 
+    }, 500); 
+
+  } else {
+    wrapper.style.transition = "transform 0.5s ease-in-out"; 
+    wrapper.style.transform = `translateX(-${(current - 1) * slideWidth}rem)`;
   }
 }
 
-nextButton.addEventListener("click", () => changeSlide(true));
+nextButton.addEventListener("click", () => {
+  if (wrapper.style.transition !== "none") {
+    changeSlide(true); 
+  }
+});
 
 previousButton.addEventListener("click", () => {
   resetInterval();
-  if (current === 1) {
-    wrapper.style.transition = "none";
-    wrapper.style.transform = `translateX(-${
-      (totalSlides - 1) * slideWidth
-    }rem)`;
-    current = totalSlides;
+
+  current--;
+
+  if (current === 0) {
+    
     setTimeout(() => {
-      wrapper.style.transition = "transform 0.5s ease-in-out";
-      wrapper.style.transform = `translateX(-${(current - 1) * slideWidth}rem)`;
-    }, 20);
+      wrapper.style.transition = "none"; 
+      wrapper.style.transform = `translateX(-${(totalSlides - 1) * slideWidth}rem)`; 
+      current = totalSlides; 
+      setTimeout(() => {
+        wrapper.style.transition = "transform 0.5s ease-in-out";
+      }, 50); 
+    }, 500); 
   } else {
-    current--;
-    wrapper.style.transition = "transform 0.5s ease-in-out";
+    wrapper.style.transition = "transform 0.5s ease-in-out"; 
     wrapper.style.transform = `translateX(-${(current - 1) * slideWidth}rem)`;
   }
 });

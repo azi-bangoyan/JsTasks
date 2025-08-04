@@ -63,11 +63,12 @@ h1 {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   letter-spacing: 0.1em;
-  margin-top: 0.75rem;
+  margin-top: 0.222rem;
   line-height: 1.6;
   display: none;
   color: #0F2A3C;
   font-size: 0.95rem;
+  padding-top: 2rem;
 }
 
 /* Plus/Minus Buttons */
